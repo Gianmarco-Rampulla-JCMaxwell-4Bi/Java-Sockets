@@ -25,8 +25,9 @@ public class ClientTesto {
 	
 	//Classe scanner per la lettura degli argomenti
 	Scanner c = new Scanner(System.in);
-	    
+	System.out.println("IP server: ");    
 	String hostName = c.next();
+	System.out.println("Numero porta: "); 
 	int portNumber = c.nextInt();
 	try {
             // prendi l'indirizzo IP del server dalla linea di comando
