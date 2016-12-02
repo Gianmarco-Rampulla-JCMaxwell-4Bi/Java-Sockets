@@ -72,5 +72,9 @@ Mentre le modifiche descritte dai primi due punti risulteranno in una fusione (m
 ## Licenza
 opensource nel modo piu' completo del termine :) senza alcuna restrizione!
 
+## Autori
+-Alessandro Ampala
+-Gianmarco Rampulla
+
 ## Ringraziamenti
 a mia moglie che mi ha permesso di trovare il tempo per questo progetto guardando il bambino ;)
