@@ -23,7 +23,7 @@ public class ClientTesto {
 	//ottengo gli argomenti dalla console (non argomenti)	//solo per debug 
 	
 	//Classe scanner per la lettura degli argomenti
-	Scanner c = new Scanner(System.In);
+	Scanner c = new Scanner(System.in);
 	    
 	String hostName = c.next();
 	int portNumber = c.nextInt();
