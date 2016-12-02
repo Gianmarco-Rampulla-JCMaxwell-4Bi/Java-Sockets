@@ -19,14 +19,14 @@ public class ClientTesto {
     
     
     public static void main(String[] args) {
-	// verifica correttezza dei parametri
-	if (args.length != 2) {
-            System.out.println("Uso: java client-Testo <indirizzo IP Server> <Porta Server>");
-            return;
-        }
-		
-	String hostName = args[0];
-	int portNumber = Integer.parseInt(args[1]);
+	    
+	//ottengo gli argomenti dalla console (non argomenti)	//solo per debug 
+	
+	//Classe scanner per la lettura degli argomenti
+	Scanner c = new Scanner(System.In);
+	    
+	String hostName = c.next();
+	int portNumber = c.nextInt();
 	try {
             // prendi l'indirizzo IP del server dalla linea di comando
             InetAddress address = InetAddress.getByName(hostName);
