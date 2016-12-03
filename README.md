@@ -74,6 +74,7 @@ opensource nel modo piu' completo del termine :) senza alcuna restrizione!
 
 ## Autori
 -Alessandro Ampala
+
 -Gianmarco Rampulla
 
 ## Ringraziamenti
