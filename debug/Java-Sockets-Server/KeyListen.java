@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication7;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Scanner;
 
 /**
@@ -27,13 +24,5 @@ public class KeyListen extends Thread {
           
           if(D.equals("exit")) {System.exit(0);}
        }   
-           
-       
-       
-               
-       
    }
-    
-    
-    
 }
