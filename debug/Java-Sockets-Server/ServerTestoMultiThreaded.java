@@ -8,13 +8,18 @@
  *
  * @author Prof. Matteo Palitto
  */
+
+
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import javaapplication7.KeyListen;
+
 
 public class ServerTestoMultiThreaded {
 
     public static void main(String[] args) {
+    
         Scanner s = new Scanner(System.in);
         
         /*if (args.length != 1) {
@@ -23,12 +28,12 @@ public class ServerTestoMultiThreaded {
         }*/
         
         int portNumber = s.nextInt();
-
+         KeyListen C = new KeyListen(); //creo ascoltatore comandi
 
         try{
             ServerSocket server = new ServerSocket(portNumber);
             System.out.println("Server di Testo in esecuzione...  (CTRL-C quits)\n");
-
+             C.start(); //faccio partire il thread per l'ascolto
             while(true){
                 SocketWorker w;
                 try {
