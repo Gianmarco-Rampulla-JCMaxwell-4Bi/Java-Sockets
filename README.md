@@ -1,11 +1,11 @@
 
 # Java-Sockets
-Concetti e realizzazione di una semplice connessione Client/Server usando Sockets in Java
+Sviluppo di due software in grado di comunicare tra di loro attraverso i **Sockets**
 ```
-Obitettivo del progetto: inviare linee di testo da un programma (Client)... -->
-                         --> ad un altro (Server) anche eventualmente remoto.
+Obiettivo del progetto: Realizzare due software in grado di comunicare 
 ```
-**Nota:** Visiona le [Slides della lezione](https://docs.google.com/presentation/d/19vhath-GbtUO7ofpukJE4Opi16aTfrnurJ2lUizB0iE/edit?usp=sharing)
+**Per saperne di più sui Sockets** --> https://docs.google.com/presentation/d/19vhath-GbtUO7ofpukJE4Opi16aTfrnurJ2lUizB0iE/edit?usp=sharing
+
 ## Istruzioni
 Per replicare il progetto sul vostro computer personale. Gli allievi potranno quindi apportare modifiche ed eventualmente fonderle con il progetto principale, o in alcuni casi creare un progetto propio.
 
@@ -80,4 +80,4 @@ opensource nel modo piu' completo del termine :) senza alcuna restrizione!
 -Gerardo Scaricaciottoli
 
 ## Ringraziamenti
-a mia moglie che mi ha permesso di trovare il tempo per questo progetto guardando il bambino ;)
+Al prof per il progetto
