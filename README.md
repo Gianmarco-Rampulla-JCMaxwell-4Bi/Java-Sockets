@@ -12,17 +12,22 @@ Per replicare il progetto sul vostro computer personale. Gli allievi potranno qu
 ### Prerequisiti
 Java SDK (Software Development Kit) - programma per la compilazione (javac) da codice in Java a ByteCode. L'installazione comprende anche Java JRE (Java Runtime Envirorment) che fornisce la Virtual Machine (VM) su cui far eseguire il ByteCode.
 ```
-E' suggerito anche l'utilizzo di netBeans IDE (Integrated Development Envirorment)
+E' suggerito anche l'utilizzo di NetBeans IDE (Integrated Development Envirorment)
 ```
 
 ### Installazione
 Scarica i files del progetto cliccando "Clone/Download"
-* in NetBeans crea due nuovi progetti "Java-Sockets-Client" e "Java-Sockets-Server"
+in NetBeans crea due nuovi progetti "Java-Sockets-Client" e "Java-Sockets-Server"
 
-* estrai i files e spostali nella sub-directory "src" dei rispettivi progetti (es. Documents\NetBeansProjects\Java-Sockets-Server\src)
 
 ## Uso
-Dal terminale del Server:
+Da NetBeans dopo aver creato il progetto:
+
+### Client 
+- Cliccare sul pulsante verde (Esegui),
+- Quando viene richiesto il nome dell'host (indirizzo ip/nome alfanumerico), inserire il nome dell'host e premere invio,
+- Quando viene richiesta la porta, inserire la porta e premere invio,
+- Se non stampa nessun errore la connessione è effettuata
 ```
 java ServerTestoMultiThreaded <server port>
 ```
@@ -68,9 +73,9 @@ Questa e' la lista di nuove funzioni da aggiungere al progetto:
 3.3. Possibilita' di uscire dalla "group chat"
 ```
 Mentre le modifiche descritte dai primi due punti risulteranno in una fusione (merge), le modifiche descritti dai punti 3 dovranno far parte di un nuovo progetto che parte da quello originario (fork).
- 
+
 ## Licenza
-opensource nel modo piu' completo del termine :) senza alcuna restrizione!
+Completamente Open Source.
 
 ## Autori
 -Alessandro Ampala
@@ -80,4 +85,4 @@ opensource nel modo piu' completo del termine :) senza alcuna restrizione!
 -Gerardo Scaricaciottoli
 
 ## Ringraziamenti
-Al prof per il progetto
+Al Prof per la proposta del progetto
