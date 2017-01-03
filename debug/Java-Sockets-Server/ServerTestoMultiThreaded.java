@@ -4,11 +4,6 @@
  * 
  */
 
-/**
- *
- * @author Prof. Matteo Palitto
- */
-
 
 import java.net.*;
 import java.io.*;
@@ -22,11 +17,7 @@ public class ServerTestoMultiThreaded {
     
         Scanner s = new Scanner(System.in);
         
-        /*if (args.length != 1) {
-            System.out.println("Uso: java ServerTestoMultithreaded <Porta Server>");
-            return;
-        }*/
-        
+        System.out.print("Inserisci numero porta: ");
         int portNumber = s.nextInt();
          KeyListen C = new KeyListen(); //creo ascoltatore comandi
 
