@@ -30,18 +30,20 @@ Da NetBeans dopo aver creato il progetto:
 NOTA: è possibile collegarsi al server con quanti Clients desidero, sia sullo stesso computer che da terminali su computer diversi.
 
 ### Esempio usando stesso computer sia per eseguire Server che multipli Clients
-Da Netbeans eseguire il Server (Cliccando sul pulsante verde):
+
+Da Netbeans creare un progetto java e denominarlo "Server", nel progetto appena creato inserire le classi Server scaricate e eseguire il file "ServerTestoMultiThread" (Cliccando sul pulsante verde, ed eventualmente in caso di richiesta, selezionando il file appena citato):
 ```
 - Quando viene richiesto la porta del server, inserire il nome dell'host e premere invio,
 - Se non stampa nessun errore la connessione è effettuata
 ```
-Da Netbeans eseguire il primo Client (Cliccando sul pulsante verde)
+Da Netbeans creare un altro progetto java e denominarlo "Client", nel progetto appena creato inserire le classi Client scaricate e eseguire il file "ClientTesto" (Cliccando sul pulsante verde, ed eventualmente in caso di richiesta, selezionando il file appena citato):
 ```
 - Quando viene richiesto il nome dell'host (indirizzo ip/nome alfanumerico), inserire il nome dell'host e premere invio,
 - Quando viene richiesta la porta, inserire la porta e premere invio,
 - Se non stampa nessun errore la connessione è effettuata
 ```
-Da Netbeans eseguire il secondo Client (Cliccando nuovamente sul pulsante verde)
+Da Netbeans, selezionato il progetto Client creato e eseguire di nuovo il file "ClientTesto" (Cliccando nuovamente sul pulsante verde)
+in modo da creare un altra istanza della classe Client.
 ```
 NOTA:se già un istanza della classe è in esecuzione, alla nuova richiesta di esecuzione Netbeans non fermerà il processo già in esecuzione ma ne creerà un altro. 
 
