@@ -51,6 +51,9 @@ NOTA:se già un istanza della classe è in esecuzione, alla nuova richiesta di e
 - Quando viene richiesta la porta, inserire la porta dello stesso host del primo client e premere invio,
 - Se non stampa nessun errore la connessione è effettuata
 ```
+## Comandi Client
+-ListaClient = Ottiene una lista dei client collegati al server
+
 ## Licenza
 Completamente Open Source.
 
