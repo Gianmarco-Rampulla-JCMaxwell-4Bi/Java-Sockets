@@ -3,15 +3,20 @@
  * Elabora il testo ricevuto che in questo caso viene semplicemente mandato indietro con l'aggiunta 
  * di una indicazione che e' il testo che viene dal Server.
  */
+package server;
+
 import java.net.*;
 import java.io.*;
+import java.util.List;
 
 /**
  *
  * @author Prof. Matteo Palitto
  */
-class SocketWorker implements Runnable {
+public class SocketWorker implements Runnable {
   private Socket client;
+  
+  List<String> utenti;
 
     //Constructor: inizializza le variabili
     SocketWorker(Socket client) {
@@ -35,10 +40,15 @@ class SocketWorker implements Runnable {
     	String line = "";
         //SETTAGGIO USERNAME
         try{
-        	//richiede username al client
-            out.println("Scegli NickName: ");
-            //riceve username dal client
-            line = in.readLine();
+            do
+            {
+                //richiede username al client
+                out.println("Scegli NickName: ");
+                //riceve username dal client
+                line = in.readLine();
+                utenti.add(line); //aggiunge utente alla list
+            }while(ControlloLista(line) == true);
+           
             System.out.println("NickName host: " + line);
         }catch(IOException e){
         	System.out.println("Ricezione username fallita");
@@ -55,6 +65,12 @@ class SocketWorker implements Runnable {
             line = in.readLine();
             //Manda lo stesso messaggio appena ricevuto con in aggiunta il "nome" del client
             out.println("Server-->" + clientPort + ">> " + line);
+            //controlla se la lista utenti è richiesta
+            if(line.equals("listaUtenti"))
+            {
+                out.println(getLista());
+            }
+            
             //scrivi messaggio ricevuto su terminale
             System.out.println(clientPort + ">> " + line);
            } catch (IOException e) {
@@ -69,4 +85,30 @@ class SocketWorker implements Runnable {
             System.out.println("Errore connessione con client: " + client);
         }
     }
+    
+    
+    private boolean ControlloLista(String nick)
+    {
+        for(int i=0; i<utenti.size(); i++)
+        {
+            if(nick.equals(utenti.get(i)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private String getLista()
+    {
+        StringBuilder str = new StringBuilder();
+        for(int i=0; i<utenti.size(); i++)
+        {
+            str.append(utenti.get(i) + "/n");
+        }
+        return str.toString();
+    }
+    
+    
+    
 }
