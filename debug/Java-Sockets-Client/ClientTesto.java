@@ -32,10 +32,19 @@ public class ClientTesto {
 	try {
             // prendi l'indirizzo IP del server dalla linea di comando
             InetAddress address = InetAddress.getByName(hostName);
-			
-            // creazione socket 
-            Socket clientSocket = new Socket(address, portNumber);
-		
+            // dichiarazione socket
+	    Socket clientSocket = null;
+           
+            try
+            {
+             clientSocket = new Socket(address, portNumber);
+            }
+            catch(SocketException e)
+            {
+                System.out.println("Impossibile stabilire una connessione: controlla la validitità degli input e riprova");
+                System.exit(-1);
+                
+            }
             // visualizza istruzioni
             System.out.println("Client-Testo: usa Ctrl-C per terminare, ENTER per spedire la linea di testo.\n");
 			
