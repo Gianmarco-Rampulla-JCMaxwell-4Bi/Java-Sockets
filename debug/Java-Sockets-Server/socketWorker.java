@@ -17,7 +17,7 @@ import java.util.List;
 public class SocketWorker implements Runnable {
   private Socket client;
   
-  List<String> utenti = new ArrayList<String>();
+  static List<String> utenti = new ArrayList<String>();
 
     //Constructor: inizializza le variabili
     SocketWorker(Socket client) {
