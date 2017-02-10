@@ -7,6 +7,7 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 public class SocketWorker implements Runnable {
   private Socket client;
   
-  List<String> utenti;
+  List<String> utenti = new ArrayList<String>();
 
     //Constructor: inizializza le variabili
     SocketWorker(Socket client) {
@@ -46,8 +47,9 @@ public class SocketWorker implements Runnable {
                 out.println("Scegli NickName: ");
                 //riceve username dal client
                 line = in.readLine();
-                utenti.add(line); //aggiunge utente alla list
             }while(ControlloLista(line) == true);
+            utenti.add(line); //aggiunge utente alla list
+            
            
             System.out.println("NickName host: " + line);
         }catch(IOException e){
@@ -104,7 +106,7 @@ public class SocketWorker implements Runnable {
         StringBuilder str = new StringBuilder();
         for(int i=0; i<utenti.size(); i++)
         {
-            str.append(utenti.get(i) + "/n");
+            str.append("[" + (i+1) + "]" + utenti.get(i) + "\n");
         }
         return str.toString();
     }
