@@ -9,12 +9,14 @@ import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Prof. Matteo Palitto
  */
-public class SocketWorker implements Runnable {
+public class SocketWorker extends Thread {
   private Socket client;
   
   static List<String> utenti = new ArrayList<String>();
@@ -77,14 +79,14 @@ public class SocketWorker implements Runnable {
             System.out.println(clientPort + ">> " + line);
            } catch (IOException e) {
             System.out.println("lettura da socket fallito");
-            System.exit(-1);
-           }
-        }
-        try {
+            try {
             client.close();
             System.out.println("connessione con client: " + client + " terminata!");
-        } catch (IOException e) {
-            System.out.println("Errore connessione con client: " + client);
+            line = null;
+            } catch (IOException e1) {
+                System.out.println("Errore connessione con client: " + client);
+            }
+           }
         }
     }
     
@@ -110,7 +112,4 @@ public class SocketWorker implements Runnable {
         }
         return str.toString();
     }
-    
-    
-    
 }
