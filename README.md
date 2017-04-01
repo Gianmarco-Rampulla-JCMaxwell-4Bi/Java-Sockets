@@ -51,6 +51,14 @@ NOTA:se già un istanza della classe è in esecuzione, alla nuova richiesta di e
 - Quando viene richiesta la porta, inserire la porta dello stesso host inserita con il primo client (solo se si vuole effettuare una connessione allo stesso Server) e premere invio,
 - Se non stampa nessun errore la connessione è effettuata
 ```
+### Chat Di Gruppo
+
+NOTA: Per poter creare una chat di gruppo funzionante, un Server deve avere più di 1 Client collegato
+
+
+
+ - 
+
 ## Comandi Client
 -listaUtenti = Ottiene una lista dei client collegati al server
 
