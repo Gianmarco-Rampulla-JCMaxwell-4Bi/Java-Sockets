@@ -1,8 +1,4 @@
-/*
- * socketWorker.java ha il compito di gestire la connessione al socket da parte di un Client.
- * Elabora il testo ricevuto che in questo caso viene semplicemente mandato indietro con l'aggiunta 
- * di una indicazione che e' il testo che viene dal Server.
- */
+
 package server;
 
 import java.net.*;
@@ -12,10 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Prof. Matteo Palitto
- */
+
 public class SocketWorker extends Thread {
   private Socket client;
   
@@ -28,6 +21,7 @@ public class SocketWorker extends Thread {
     
     BufferedReader in = null;
     PrintWriter out = null;
+    String username;
     private String nomeGruppo;
     
     // Questa e' la funzione che viene lanciata quando il nuovo "Thread" viene generato
@@ -52,8 +46,11 @@ public class SocketWorker extends Thread {
                 //riceve username dal client
                 line = in.readLine();
             }while(ServerTestoMultiThreaded.ControllaNickname(line));
+            
+            username = line;
             ServerTestoMultiThreaded.utenti.add(line);
             clientPort = line; //il "nome" del mittente (client)
+            
            
             System.out.println("NickName host: " + line);
         }catch(IOException e){
@@ -61,7 +58,18 @@ public class SocketWorker extends Thread {
         	System.exit(-1);
         }
         
-        String risp = null;
+       
+        
+        Seleziona(line, in, out);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    
+    private void Seleziona(String line, BufferedReader in, PrintWriter out)
+    {
+         String risp = null;
         try
         {
             out.println("Vuoi far parte di un gruppo? (Y/N)");
@@ -71,21 +79,23 @@ public class SocketWorker extends Thread {
             
         }
         
-        switch(risp)
+         switch(risp)
         {
             case "N":
-                No(line, in, out);
+                No(line);
                 break;
             case "Y":
+                Si(line);
                 break;
             default:
-                out.println("Ou");
+                out.println("Risposta non valida: Digitare Y per si o N per no");
+                Seleziona(line, in, out);
         }
+        
     }
     
     
-    
-    private void No(String line, BufferedReader in, PrintWriter out)
+    private void No(String line)
     {
                 while(line != null){
                   try{
@@ -95,7 +105,7 @@ public class SocketWorker extends Thread {
                     //controlla se la lista utenti è richiesta
                     if(line.equals("listaUtenti"))
                     {
-                        out.println(getLista());
+                        out.println(ServerTestoMultiThreaded.getLista());
                     }
 
                     //scrivi messaggio ricevuto su terminale
@@ -113,12 +123,18 @@ public class SocketWorker extends Thread {
                 }
     }
     
-    private void Si(String line, BufferedReader in, PrintWriter out)
+    private void Si(String line)
     {
+      
+        
+        
+        
+        
         String risp = null;
-        out.println("Numero gruppi esistenti: " + GroupClass.getGroupSize());
-        GroupClass.printNames(out);
+        out.println("Numero gruppi esistenti: " + ServerTestoMultiThreaded.getGroupSize());
+        out.println(ServerTestoMultiThreaded.printNames());
         out.println("Inserire nome del gruppo in cui entrare oppure digitare \"new\" per creare un  nuovo gruppo");
+        
         try{
             risp = in.readLine();
         }catch(IOException e)
@@ -127,12 +143,15 @@ public class SocketWorker extends Thread {
             System.exit(-1);
         }
         
+       
+        
         switch(risp)
         {
             case "new":
-                out.print("Scegli il nome del nuvo gruppo: ");
+              
                 try
-                {
+                {  
+                    out.println("Scegli il nome del nuovo gruppo: ");
                     risp = in.readLine();
                 }catch(IOException e)
                 {
@@ -142,6 +161,9 @@ public class SocketWorker extends Thread {
                 GroupClass nuovoGruppo = new GroupClass(risp, this);
                 ServerTestoMultiThreaded.gruppi.add(nuovoGruppo);
                 nomeGruppo = risp;
+                
+               
+                out.println("Gruppo creato con successo!");
                 
                 break;
             
@@ -153,16 +175,18 @@ public class SocketWorker extends Thread {
                         if(ServerTestoMultiThreaded.gruppi.get(i).getNomeGruppo().equals(risp))
                         {
                             ServerTestoMultiThreaded.gruppi.get(i).aggiungiUtente(this);
+                            nomeGruppo = ServerTestoMultiThreaded.gruppi.get(i).getNomeGruppo();
+                                
                         }
                     }
                 }
                 else
                 {
                     out.println("Non esistono gruppi con il nome inserito");
-                    Si(line, in, out);  //funzione ricorsiva! Ricomincia dall'inizio la stessa funzione
+                    Si(line);  //funzione ricorsiva! Ricomincia dall'inizio la stessa funzione
                 }
             
-            
+        }
             while(line != null){
                   try{
                     line = in.readLine();
@@ -174,10 +198,11 @@ public class SocketWorker extends Thread {
                     
                     for(int i=0; i<ServerTestoMultiThreaded.gruppi.size(); i++)
                     {
-                        if(ServerTestoMultiThreaded.gruppi.get(i).equals(nomeGruppo))
+                        if(ServerTestoMultiThreaded.gruppi.get(i).getNomeGruppo().equals(nomeGruppo))
                         {
-                            for(int j=0; j<ServerTestoMultiThreaded.gruppi.get(i).getListaSocket().size(); i++)
+                            
                             ServerTestoMultiThreaded.gruppi.get(i).sendMessageToGroup(line, this);
+                            break;
                         }
                     }
                     
@@ -195,7 +220,7 @@ public class SocketWorker extends Thread {
                 }
             
             
-        }
+        
     } 
     
     public void sendMessage(String msg)
