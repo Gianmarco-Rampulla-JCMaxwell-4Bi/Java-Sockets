@@ -19,20 +19,20 @@ import java.util.logging.Logger;
 public class SocketWorker extends Thread {
   private Socket client;
   
-  static List<String> utenti = new ArrayList<String>();
-  
   String clientPort;
-
     //Constructor: inizializza le variabili
     SocketWorker(Socket client) {
         this.client = client;
         System.out.println("Connesso con: " + client);
     }
-
+    
+    BufferedReader in = null;
+    PrintWriter out = null;
+    private String nomeGruppo;
+    
     // Questa e' la funzione che viene lanciata quando il nuovo "Thread" viene generato
     public void run(){
-    	BufferedReader in = null;
-        PrintWriter out = null;
+    	
         try{
           // connessione con il socket per ricevere (in) e mandare(out) il testo
           in = new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -51,9 +51,9 @@ public class SocketWorker extends Thread {
                 out.println("Scegli NickName: ");
                 //riceve username dal client
                 line = in.readLine();
-            }while(ControlloLista(line) == true);
-            utenti.add(line); //aggiunge utente alla list
-            
+            }while(ServerTestoMultiThreaded.ControllaNickname(line));
+            ServerTestoMultiThreaded.utenti.add(line);
+            clientPort = line; //il "nome" del mittente (client)
            
             System.out.println("NickName host: " + line);
         }catch(IOException e){
@@ -84,31 +84,9 @@ public class SocketWorker extends Thread {
     }
     
     
-    private boolean ControlloLista(String nick)
-    {
-        for(int i=0; i<utenti.size(); i++)
-        {
-            if(nick.equals(utenti.get(i)))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private String getLista()
-    {
-        StringBuilder str = new StringBuilder();
-        for(int i=0; i<utenti.size(); i++)
-        {
-            str.append("[" + (i+1) + "]" + utenti.get(i) + "\n");
-        }
-        return str.toString();
-    }
     
     private void No(String line, BufferedReader in, PrintWriter out)
     {
-                clientPort = line; //il "nome" del mittente (client)
                 while(line != null){
                   try{
                     line = in.readLine();
@@ -152,22 +130,85 @@ public class SocketWorker extends Thread {
         switch(risp)
         {
             case "new":
+                out.print("Scegli il nome del nuvo gruppo: ");
+                try
+                {
+                    risp = in.readLine();
+                }catch(IOException e)
+                {
+                    System.out.println("Ricevimento dati fallito ");
+                }
+                
+                GroupClass nuovoGruppo = new GroupClass(risp, this);
+                ServerTestoMultiThreaded.gruppi.add(nuovoGruppo);
+                nomeGruppo = risp;
+                
                 break;
             
             default:
-                if(GroupClass.checkGroup(risp))
+                if(ServerTestoMultiThreaded.checkGroup(risp))
                 {
-                    
+                    for(int i=0; i<ServerTestoMultiThreaded.gruppi.size(); i++)
+                    {
+                        if(ServerTestoMultiThreaded.gruppi.get(i).getNomeGruppo().equals(risp))
+                        {
+                            ServerTestoMultiThreaded.gruppi.get(i).aggiungiUtente(this);
+                        }
+                    }
                 }
                 else
                 {
                     out.println("Non esistono gruppi con il nome inserito");
                     Si(line, in, out);  //funzione ricorsiva! Ricomincia dall'inizio la stessa funzione
                 }
-                
+            
+            
+            while(line != null){
+                  try{
+                    line = in.readLine();
+                    //controlla se la lista utenti è richiesta
+                    if(line.equals("listaUtenti"))
+                    {
+                            ServerTestoMultiThreaded.printUtentiFromNomeGruppo(nomeGruppo, out);
+                    }
+                    
+                    for(int i=0; i<ServerTestoMultiThreaded.gruppi.size(); i++)
+                    {
+                        if(ServerTestoMultiThreaded.gruppi.get(i).equals(nomeGruppo))
+                        {
+                            for(int j=0; j<ServerTestoMultiThreaded.gruppi.get(i).getListaSocket().size(); i++)
+                            ServerTestoMultiThreaded.gruppi.get(i).sendMessageToGroup(line, this);
+                        }
+                    }
+                    
+                    
+                   } catch (IOException e) {
+                    System.out.println("lettura da socket fallito");
+                    try {
+                    client.close();
+                    System.out.println("connessione con client: " + client + " terminata!");
+                    line = null;
+                    } catch (IOException e1) {
+                        System.out.println("Errore connessione con client: " + client);
+                    }
+                   }
+                }
+            
+            
         }
-        
     } 
     
+    public void sendMessage(String msg)
+    {
+        out.println(msg);
+    }
+
+    public String getNomeGruppo() {
+        return nomeGruppo;
+    }
+
+    public void setNomeGruppo(String nomeGruppo) {
+        this.nomeGruppo = nomeGruppo;
+    }
     
 }
