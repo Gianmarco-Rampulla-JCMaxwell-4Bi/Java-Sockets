@@ -33,7 +33,7 @@ NOTA: è possibile collegarsi al server con quanti Clients desidero, sia sullo s
 
 Da Netbeans creare un progetto java e denominarlo "Server", nel progetto appena creato inserire le classi Server scaricate e eseguire il file "ServerTestoMultiThread" (Cliccando sul pulsante verde, ed eventualmente in caso di richiesta, selezionando il file appena citato):
 ```
-- Quando viene richiesto la porta del server, inserire il nome dell'host e premere invio,
+- Quando viene richiesto la porta del server, inserire il numero della porta sulla quale si vogliono effettuare le connessioni e premere invio,
 - Se non stampa nessun errore la connessione è effettuata
 ```
 Da Netbeans creare un altro progetto java e denominarlo "Client", nel progetto appena creato inserire le classi Client scaricate e eseguire il file "ClientTesto" (Cliccando sul pulsante verde, ed eventualmente in caso di richiesta, selezionando il file appena citato):
@@ -47,12 +47,12 @@ in modo da creare un altra istanza della classe Client.
 ```
 NOTA:se già un istanza della classe è in esecuzione, alla nuova richiesta di esecuzione Netbeans non fermerà il processo già in esecuzione ma ne creerà un altro. 
 
-- Quando viene richiesto il nome dell'host inserire il nome dello stesso host del primo client e premere invio, 
-- Quando viene richiesta la porta, inserire la porta dello stesso host del primo client e premere invio,
+- Quando viene richiesto il nome dell'host inserire il nome dello stesso host inserito con il primo client (solo se si vuole effettuare una connessione allo stesso Server) e premere invio, 
+- Quando viene richiesta la porta, inserire la porta dello stesso host inserita con il primo client (solo se si vuole effettuare una connessione allo stesso Server) e premere invio,
 - Se non stampa nessun errore la connessione è effettuata
 ```
 ## Comandi Client
--ListaClient = Ottiene una lista dei client collegati al server
+-listaUtenti = Ottiene una lista dei client collegati al server
 
 ## Licenza
 Completamente Open Source.
