@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  *
- * @author alessandro.ampala/gianmarco.rampulla
+ * @author alessandro.ampala/gianmarco.rampulla/gerardo.scaricaciottoli
  */
 public class GroupClass {
     
@@ -45,7 +45,7 @@ public class GroupClass {
         {
             if(c != sender)
             {
-                c.sendMessage(msg);
+                c.sendMessage(sender.getUsername() + "@" + sender.getNomeGruppo() + " dice: " + msg);
             }
         }
     }
@@ -55,31 +55,8 @@ public class GroupClass {
     
     
     
-    
-    
-    
-    
-    /*public void printNames(PrintWriter out)
-    {
-        for(String item : NomeGruppi)
-        {
-            out.println(item);
-        }
-    }
-
-    public int getGroupSize() {
-        return NomeGruppi.size();
-    }
-    
-    
-    
-    public String searchListNameBySocketWorker(SocketWorker sw)
-    {
-        for(int i=0; i<)
-    }*/
-
-    
-
-    
-    
 }
+    
+
+    
+    
