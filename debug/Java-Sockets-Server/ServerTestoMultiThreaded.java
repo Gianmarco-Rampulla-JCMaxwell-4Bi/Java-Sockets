@@ -73,6 +73,22 @@ public class ServerTestoMultiThreaded {
         return false;
     }
     
+    public static String  getLista()
+    {
+        StringBuilder Ciao = new StringBuilder();
+        
+        
+        
+        for(String c : utenti)
+        {
+            Ciao.append("Utente: " + c + "\n");
+            
+        }
+        
+        return Ciao.toString();
+        
+    }
+    
     public static void printUtentiFromNomeGruppo(String nomeGruppo, PrintWriter out)
     {
         for(int i=0; i<gruppi.size(); i++)
@@ -81,10 +97,32 @@ public class ServerTestoMultiThreaded {
             {
                 for(int j=0; j<gruppi.get(i).getListaSocket().size(); j++)
                 {
-                    out.println(gruppi.get(i).getListaSocket().get(j));
+                    out.println(gruppi.get(i).getListaSocket().get(j).getUsername());
                 }
             }
         }
     }
-
-}
+    
+    public static int getGroupSize()
+    {
+        return gruppi.size();
+        
+    }
+    
+    public static String printNames()
+    {
+        
+        StringBuilder Nomi = new StringBuilder();
+        
+        
+        
+        for(GroupClass c : gruppi)
+        {
+            Nomi.append("Gruppo: " + c.getNomeGruppo() + "\n");
+            
+        }
+        
+        return Nomi.toString();
+        
+        
+    }
