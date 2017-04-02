@@ -1,5 +1,3 @@
-package server;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +23,10 @@ public class GroupClass {
         listaSocket.add(socketDaAggiungere);
     }
     
+    public void rimuoviUtente(int index)
+    {
+    	listaSocket.remove(index);
+    }
     
     
     public String getNomeGruppo() {
@@ -50,13 +52,15 @@ public class GroupClass {
         }
     }
     
-    
-    
-    
-    
+    public void sendMessageOfAbandoning( SocketWorker sender)
+    {
+    	for(SocketWorker c : listaSocket)
+        {
+            if(c != sender)
+            {
+                c.sendMessage(sender.getUsername() + "@" + sender.getNomeGruppo() + "ha abbandonato " + sender.getNomeGruppo());
+            }
+        }
+    }
     
 }
-    
-
-    
-    
